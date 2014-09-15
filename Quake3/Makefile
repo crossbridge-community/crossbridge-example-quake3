@@ -6,7 +6,7 @@ $?OPT=$(FLASCC)/usr/bin/opt
 $?EXTRACFLAGS=
 
 $?BASECFLAGS= -Dstricmp=strcasecmp -DNO_VM_COMPILED -DHARD_LINKED -DARCH_STRING='"AVM2"' -DAPIENTRY="" -DSTANDALONE -DBOTLIB $(EXTRACFLAGS) \
--DOPENGL -DCGAME -DGAME_HARD_LINKED -DC_ONLY -Wno-pointer-sign -I$(FLASCC)/usr/include/SDL -I$(GLS3D)/install/usr/include $(EXTRACFLAGS) \
+-DOPENGL -DCGAME -DGAME_HARD_LINKED -DC_ONLY -Wno-pointer-sign -I$(FLASCC)/usr/include/SDL -I$(FLASCC)/usr/include $(EXTRACFLAGS) \
 -Icode \
 -Icode/q3_ui \
 -Icode/qcommon \
@@ -295,7 +295,7 @@ q3link:
 		-abcfuture -AS3 -strict -optimize \
 		-import $(FLASCC)/usr/lib/builtin.abc \
 		-import $(FLASCC)/usr/lib/playerglobal.abc \
-		-import $(GLS3D)/install/usr/lib/libGL.abc \
+		-import $(FLASCC)/usr/lib/libGL.abc \
 		-import $(FLASCC)/usr/lib/ISpecialFile.abc \
 		-import $(FLASCC)/usr/lib/IBackingStore.abc \
 		-import $(FLASCC)/usr/lib/IBackingStoreManager.abc \
@@ -304,7 +304,7 @@ q3link:
 		-import $(FLASCC)/usr/lib/BinaryData.abc \
 		-import $(FLASCC)/usr/lib/PlayerPosix.abc \
 		Console.as -outdir . -out Console
-	cd $(BUILDDIR) && $(CC) $(CFLAGS) quake3.abc $(GLS3D)/install/usr/lib/libGL.abc $(GLS3D)/install/usr/lib/libGL.a -lSDL -lvgl \
+	cd $(BUILDDIR) && $(CC) $(CFLAGS) quake3.abc $(FLASCC)/usr/lib/libGL.abc $(FLASCC)/usr/lib/libGL.a -lSDL -lvgl \
 		-Wl,--warn-unresolved-symbols -symbol-abc=Console.abc -swf-version=16 -swf-preloader=preloader.swf -emit-swf -swf-size=1024x768 -o ../Quake3.swf
 
 clean:
